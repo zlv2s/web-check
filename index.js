@@ -6,4 +6,4 @@ const domain = argv.slice(2, 3)
 
 const response = check(...domain)
 
-response.then((res) => console.log(res.data)).catch((err) => console.log(err))
+response.then(res => console.log(res.data)).catch(err => console.log(err))
