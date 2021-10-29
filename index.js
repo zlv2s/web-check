@@ -1,9 +1,37 @@
-const argv = process.argv
+const fs = require('fs')
+const path = require('path')
+const request = require('./utils/request')
+const _ = require('lodash')
 
-const check = require('./check')
+const reqData = require('./req.json')
 
-const domain = argv.slice(2, 3)
+const handleResponse = ({ criteria, result }) => {
+  // todo
+  return { criteria, result }
+}
 
-const response = check(...domain)
+const sendReq = ({ criteria, body }) => {
+  return new Promise((resolve, reject) => {
+    request({
+      url: '/post',
+      method: 'post',
+      data: body
+    })
+      .then(res => {
+        resolve(handleResponse({ criteria, result: res.origin }))
+      })
+      .catch(reject)
+  })
+}
 
-response.then(res => console.log(res.data)).catch(err => console.log(err))
+const prepareReqDataArr = reqBody =>
+  Object.keys(reqBody).map(k => ({
+    criteria: `${k} is missing`,
+    body: _.omit(_.cloneDeep(reqData), [k])
+  }))
+
+const reqDataArr = prepareReqDataArr(reqData)
+
+Promise.all(reqDataArr.map(data => sendReq(data))).then(res => {
+  console.log(res)
+})

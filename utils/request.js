@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { BASE_URL } = require('./config')
+const { BASE_URL } = require('../config')
 
 const service = axios.create({
   baseURL: BASE_URL,
