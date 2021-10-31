@@ -1,10 +1,11 @@
 {
-  "foo": "foo",
-  "bar": "bar",
-  "baz": "baz",
-  "name": "jerry",
-  "age": 12,
-  "id": "123456",
-  "address": "Cheng Du, China",
-  "phone": "187828213213"
+  "header": {
+    "seqNo": "123344554",
+    "channel": "100051"
+  },
+  "body": {
+    "aaa": "foo",
+    "bbb": "bar",
+    "ccc": "baz"
+  }
 }

@@ -30,8 +30,22 @@ const prepareReqDataArr = reqBody =>
     body: _.omit(_.cloneDeep(reqData), [k])
   }))
 
-const reqDataArr = prepareReqDataArr(reqData)
+const resList = []
 
-Promise.all(reqDataArr.map(data => sendReq(data))).then(res => {
-  console.log(res)
+Object.keys(reqData).forEach(k => {
+  const obj = _.cloneDeep(reqData[k])
+  Object.keys(obj).forEach(k2 => {
+    reqData[k] = _.omit(obj, [k2])
+    resList.push(_.cloneDeep(reqData))
+  })
+  reqData[k] = obj
 })
+
+// const reqDataArr = prepareReqDataArr(reqData)
+console.log(resList)
+
+console.log(reqData)
+
+// Promise.all(reqDataArr.map(data => sendReq(data))).then(res => {
+//   console.log(res)
+// })
