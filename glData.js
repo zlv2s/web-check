@@ -40,6 +40,8 @@ function proxyObj(obj) {
             return target[property]
         },
         set(target, property, value) {
+            // 不会监测到amount数组变化
+            console.log(property + 'changed')
             target[property] = value
             return true
         }
